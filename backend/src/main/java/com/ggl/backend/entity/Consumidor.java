@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "consumidor")
-@PrimaryKeyJoinColumn(name = "fk_id")
+@PrimaryKeyJoinColumn(name = "fk_usuario_id")
 @Getter
 @Setter
 @NoArgsConstructor

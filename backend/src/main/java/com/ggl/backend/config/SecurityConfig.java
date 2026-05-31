@@ -16,13 +16,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-
-                .csrf(csrf -> csrf.ignoringRequestMatchers(PathRequest.toH2Console()))
-
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(PathRequest.toH2Console()).permitAll() // Libera o banco H2 de forma limpa
-                        .requestMatchers("/api/user/**").permitAll()           // Libera as rotas de teste de usuário
-                        .requestMatchers("/api/consumidor/").permitAll()
+                        .requestMatchers("/h2/**").permitAll()
+                        .requestMatchers("/api/user/**").permitAll()
+                        .requestMatchers("/api/consumidor/**").permitAll()
                         .anyRequest().authenticated()
                 )
 

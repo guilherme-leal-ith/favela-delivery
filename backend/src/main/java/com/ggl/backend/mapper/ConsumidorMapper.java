@@ -11,6 +11,7 @@ public class ConsumidorMapper {
         consumidor.setNome(dto.nome());
         consumidor.setEmail(dto.email());
         consumidor.setSenha(senhaHash);
+        consumidor.setCpf(dto.cpf());
         return consumidor;
     }
 
