@@ -12,13 +12,12 @@ import org.springframework.stereotype.Service;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-    //private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository/*,
-                          PasswordEncoder passwordEncoder*/) {
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         
         this.usuarioRepository = usuarioRepository;
-        //this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UsuarioResponseDTO findByEmail(String email) {
@@ -32,16 +31,19 @@ public class UsuarioService {
 
     public UsuarioResponseDTO saveUsuario(UsuarioRequestDTO requestDTO) {
 
+        Usuario usuarioExistente = usuarioRepository.findByEmail(requestDTO.email());
+
         if (findByEmail(requestDTO.email()) != null) {
             throw new RuntimeException("Email ja cadastrado");
         }
 
-        //String senhaHash = passwordEncoder.encode(requestDTO.senha());
-        String senhaHash = requestDTO.senha();
 
-        Usuario novoUsuario = UsuarioMapper.toEntity(requestDTO, senhaHash);
-        Usuario usuarioSalvo = usuarioRepository.save(novoUsuario);
+      String senhaHash = passwordEncoder.encode(requestDTO.senha());
+      Usuario novoUsuario = UsuarioMapper.toEntity(requestDTO, senhaHash);
+      Usuario usuarioSalvo = usuarioRepository.save(novoUsuario);
 
-        return UsuarioMapper.toResponseDTO(usuarioSalvo);
+      return UsuarioMapper.toResponseDTO(usuarioSalvo);
     }
+
+
 }

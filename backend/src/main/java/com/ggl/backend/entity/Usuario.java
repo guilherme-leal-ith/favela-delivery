@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 public class Usuario {
 

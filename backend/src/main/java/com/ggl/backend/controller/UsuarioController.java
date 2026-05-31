@@ -5,6 +5,7 @@ import com.ggl.backend.dto.UsuarioResponseDTO;
 import com.ggl.backend.entity.Usuario;
 import com.ggl.backend.mapper.UsuarioMapper;
 import com.ggl.backend.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.findByEmail(email));
     }
 
-    @PostMapping //RequestBody transforma a requissicao HTTP naquele tipo
-    public UsuarioResponseDTO create(@RequestBody UsuarioRequestDTO requestDTO) {
+    @PostMapping //RequestBody transforma a requisicao HTTP naquele tipo
+    public UsuarioResponseDTO create(@Valid @RequestBody UsuarioRequestDTO requestDTO) {
         return usuarioService.saveUsuario(requestDTO);
     }
 }

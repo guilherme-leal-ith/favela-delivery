@@ -1,28 +1,11 @@
-/*package com.ggl.backend.config;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-
-@Configuration
-public class SecurityConfig {
-
-    //RESOLVER FILTRO
-
-    @Bean
-    public PasswordEncoder passwordHash() {
-        return new BCryptPasswordEncoder();
-    }
-}
-*/package com.ggl.backend.config;
+package com.ggl.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import java.util.List;
@@ -44,16 +27,25 @@ public class SecurityConfig {
                 }))
                 // 2. Desabilita o CSRF (necessário para APIs REST receberem POST)
                 .csrf(csrf -> csrf.disable())
-                // 3. Libera as rotas de cadastro e login para qualquer pessoa acessar sem token
+                // 3. Libera as rotas necessárias (as suas e as do seu colega)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/user", "/api/user/**", "/h2/**").permitAll()
+                        .requestMatchers("/h2/**").permitAll()
+                        .requestMatchers("/api/user", "/api/user/**").permitAll()
+                        .requestMatchers("/api/consumidor/**").permitAll() // Rota que o seu colega adicionou!
                         .anyRequest().authenticated()
                 )
-                // 4. Desativa as telas de login automáticas do Spring
+                // 4. Configurações extras para o console do H2 funcionar e desativa logins automáticos
+                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable());
 
         return http.build();
+    }
+
+    // 5. Mantém o encoder de senha que o back-end precisa para funcionar
+    @Bean
+    public PasswordEncoder passwordHash() {
+        return new BCryptPasswordEncoder();
     }
 }
