@@ -1,5 +1,5 @@
 package com.ggl.backend.controller;
-
+import org.springframework.web.bind.annotation.RestController;
 import com.ggl.backend.dto.UsuarioRequestDTO;
 import com.ggl.backend.dto.UsuarioResponseDTO;
 import com.ggl.backend.entity.Usuario;
@@ -9,8 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/api/user")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;

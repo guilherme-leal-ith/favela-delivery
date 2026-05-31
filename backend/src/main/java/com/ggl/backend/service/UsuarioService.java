@@ -24,13 +24,15 @@ public class UsuarioService {
     public UsuarioResponseDTO findByEmail(String email) {
 
         Usuario usuario = usuarioRepository.findByEmail(email);
-
+        if (usuario == null) {
+            return null; // Se não encontrar o usuário, retorna nulo com segurança em vez de quebrar
+        }
         return UsuarioMapper.toResponseDTO(usuario);
     }
 
     public UsuarioResponseDTO saveUsuario(UsuarioRequestDTO requestDTO) {
 
-        if (findByEmail(requestDTO.email()) == null) {
+        if (findByEmail(requestDTO.email()) != null) {
             throw new RuntimeException("Email ja cadastrado");
         }
 
