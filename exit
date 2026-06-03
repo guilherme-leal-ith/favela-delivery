@@ -1,0 +1,67 @@
+[33mcommit 1229d34cc7e5fc276770c58ce49f5c6daf3fa36c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature-frontend-base[m[33m, [m[1;31morigin/feature-frontend-base[m[33m)[m
+Merge: 7724d6f 154172e
+Author: luis <luis.coelho1999@gmail.com>
+Date:   Sun May 31 19:05:42 2026 -0300
+
+    Fix: resolve conflitos de seguranca e corrige validacao do TipoUsuarioEnum
+
+[33mcommit 7724d6fbbc23ce09475afb979323d19233efeb8d[m
+Author: luis <luis.coelho1999@gmail.com>
+Date:   Sun May 31 18:27:38 2026 -0300
+
+    Fix: ajusta mapeamento no react e corrige logica de cadastro no back
+
+[33mcommit ea0e68aac5476edb74372741cb6d40af6bce2bf4[m
+Author: luis <luis.coelho1999@gmail.com>
+Date:   Sun May 31 18:15:43 2026 -0300
+
+    Fix: ajusta mapeamento do React e corrige logica de cadastro no UsuarioService
+
+[33mcommit 154172e73d5faf4ffaa0270fb9a21adece93d8fe[m[33m ([m[1;31morigin/consumidor-endereco[m[33m)[m
+Merge: 5b48985 17fc079
+Author: Gabriel <gabrielrochasouza18@gmail.com>
+Date:   Sun May 31 15:35:37 2026 -0300
+
+    Merge branch do frontend com backend corrigido
+
+[33mcommit 5b48985702d41cdfaea31e43e631084c895fe655[m
+Author: Gabriel <gabrielrochasouza18@gmail.com>
+Date:   Sun May 31 14:53:13 2026 -0300
+
+    Fix: Correção do mapeamento de consumidor e liberação da segurança
+
+[33mcommit 17fc079ca2e4d1b5c77db493b76ebca67dac4cf7[m
+Author: luis <luis.coelho1999@gmail.com>
+Date:   Sun May 31 13:05:38 2026 -0300
+
+    fix: removendo arquivos desnecessários do front
+
+[33mcommit c9d4bb0c94207fe1b3c023820f3c094c0b1ba057[m
+Author: luis <luis.coelho1999@gmail.com>
+Date:   Fri May 29 23:23:17 2026 -0300
+
+    feat: estrutura inicial do front, telas de login e cadastro com authcontext
+
+[33mcommit ef7a3b4b892c2ee914a4b75c4e459835d5360b07[m
+Author: Gabriel <gabrielrochasouza18@gmail.com>
+Date:   Fri May 29 17:23:09 2026 -0300
+
+    Adiçao das classes Consumidor e Endereço
+
+[33mcommit 5a7ce8770431f6d3d149b6fbd09b01059606f58e[m
+Author: Gabriel <gabrielrochasouza18@gmail.com>
+Date:   Fri May 29 17:17:17 2026 -0300
+
+    Adição das classe Consumidor e Endereço
+
+[33mcommit 664a334f343ff8242791219286d66a6190bac751[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: guilherme-leal-ith <guilhermesilvalealll@gmail.com>
+Date:   Fri May 22 19:54:32 2026 -0300
+
+    feat: adiciona pasta backend com usuario mapeado
+
+[33mcommit eb42ed5e044b54fdd17fa9371d1ba459ab87e033[m
+Author: Guilherme Leal <guilhermesilvalealll@gmail.com>
+Date:   Thu Apr 30 19:18:13 2026 -0300
+
+    Initial commit

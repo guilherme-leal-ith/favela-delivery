@@ -9,7 +9,6 @@ export const authService = {
     }
   },
 
-  // ADICIONE ESTA FUNÇÃO:
   login: async (email, senha) => {
     try {
       const response = await api.post('/usuarios/login', { email, senha });
