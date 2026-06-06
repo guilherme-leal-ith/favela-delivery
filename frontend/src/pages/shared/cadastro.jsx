@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../services/contexts/authContext'; // Mantive caso seu projeto use o contexto de autenticação
+import { useAuth } from '../../services/contexts/authContext'; // Mantido caso seu projeto use
 import api from '../../services/api';
-import './style.css'; // Correção crucial: removido o "s" do final para bater com o seu arquivo real
-import { Link } from 'react-router-dom';
+import './style.css'; 
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Cadastro() {
+  const navigate = useNavigate();
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -29,10 +30,10 @@ export default function Cadastro() {
       telefone 
     };
 
-    console.log("Dados que o React está enviando:", dadosCadastro);
-
     if (tipoUsuario === 'CONSUMIDOR') dadosCadastro.comunidade = comunidade;
     if (tipoUsuario === 'ENTREGADOR') dadosCadastro.cnh = cnh;
+
+    console.log("Dados que o React está enviando:", dadosCadastro);
 
     try {
       // Faz o disparo da requisição POST para a API unificada do Back-end
@@ -46,6 +47,12 @@ export default function Cadastro() {
       setTelefone('');
       setComunidade('');
       setCnh('');
+
+      // Redireciona para o login após 2 segundos para dar tempo de ver a mensagem de sucesso
+      setTimeout(() => {
+        navigate('/loguin');
+      }, 2000);
+
     } catch (err) {
       const mensagemErro = err.response?.data?.mensagem || 'Erro ao realizar o cadastro. Verifique os dados ou tente novamente.';
       setErro(mensagemErro);
@@ -60,7 +67,7 @@ export default function Cadastro() {
         <p className="auth-subtitle">Crie sua conta e faça parte da nossa rede</p>
 
         {erro && <div className="msg-erro">{erro}</div>}
-        {sucesso && <div className="msg-sucesso">Cadastro realizado com sucesso! 🎉</div>}
+        {sucesso && <div className="msg-sucesso">Cadastro realizado com sucesso! 🎉 Redirecionando...</div>}
 
         <form onSubmit={handleCadastro}>
           

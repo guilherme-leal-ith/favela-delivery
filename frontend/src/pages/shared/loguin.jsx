@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../services/contexts/authContext'; // Se você usar o contexto de login
+import { useAuth } from '../../services/contexts/authContext'; // Mantido caso use
 import api from '../../services/api';
-import { Link } from 'react-router-dom';
-import './style.css'; // Carrega o mesmo arquivo de estilos que o cadastro usa
+import { Link, useNavigate } from 'react-router-dom';
+import './style.css'; 
 
 export default function Loguin() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
@@ -12,16 +13,26 @@ export default function Loguin() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setErro('');
+    
+    if (email === '' || senha === '') {
+      alert("Por favor, preencha todos os campos!");
+      return;
+    }
 
     try {
-      // Exemplo de envio para a API (Ajuste a rota conforme o seu back-end)
+      // Exemplo de envio para a API 
       const resposta = await api.post('/api/auth/login', { email, senha });
       
-      // Armazena o token ou dados de login se necessário
       console.log("Login efetuado com sucesso!", resposta.data);
       
-      // Aqui você pode redirecionar para a Home após o login
+      // Se precisar salvar dados ou token do usuário logado:
+      // localStorage.setItem('@FavelaFood:user', JSON.stringify(resposta.data));
+      
+      // Redireciona para a Home apenas se o back-end autenticar com sucesso
+      navigate('/home'); 
+      
     } catch (err) {
+      console.error("Erro na requisição de login:", err);
       const mensagemErro = err.response?.data?.mensagem || 'E-mail ou senha incorretos.';
       setErro(mensagemErro);
     }
@@ -31,7 +42,6 @@ export default function Loguin() {
     <div className="auth-container">
       <div className="auth-card">
         
-        {/* Identidade Visual igual à imagem que você enviou */}
         <h1 className="auth-logo">FavelaFood</h1>
         <p className="auth-subtitle">Entre com a sua conta para fazer pedidos</p>
 
@@ -61,13 +71,11 @@ export default function Loguin() {
             />
           </div>
 
-          {/* Botão ovalado no estilo "Pedir" da imagem */}
           <button type="submit" className="btn-primary">
             Entrar
           </button>
         </form>
 
-        {/* Navegação instantânea usando o Link do React Router */}
         <p className="auth-switch">
           Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
         </p>
