@@ -1,85 +1,77 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../services/contexts/authContext';
+import { useAuth } from '../../services/contexts/authContext'; // Se você usar o contexto de login
+import api from '../../services/api';
+import { Link } from 'react-router-dom';
+import './style.css'; // Carrega o mesmo arquivo de estilos que o cadastro usa
 
-export function Login() {
-  const { loginGlobal } = useAuth();
+export default function Loguin() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
-  const [carregando, setCarregando] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setErro('');
-    setCarregando(true);
 
     try {
-      const usuarioLogado = await loginGlobal(email, senha);
+      // Exemplo de envio para a API (Ajuste a rota conforme o seu back-end)
+      const resposta = await api.post('/api/auth/login', { email, senha });
       
-      // Lógica de Redirecionamento baseada nas Regras de Negócio do FavelaFood
-      if (usuarioLogado.tipo === 'CONSUMIDOR') {
-        window.location.href = '/dashboard-cliente';
-      } else if (usuarioLogado.tipo === 'ESTABELECIMENTO') {
-        window.location.href = '/painel-loja';
-      } else if (usuarioLogado.tipo === 'ENTREGADOR') {
-        window.location.href = '/entregas-disponiveis';
-      }
+      // Armazena o token ou dados de login se necessário
+      console.log("Login efetuado com sucesso!", resposta.data);
+      
+      // Aqui você pode redirecionar para a Home após o login
     } catch (err) {
-      setErro(err);
-    } finally {
-      setCarregando(false);
+      const mensagemErro = err.response?.data?.mensagem || 'E-mail ou senha incorretos.';
+      setErro(mensagemErro);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-2">
-          Login <span className="text-yellow-500">FavelaFood</span>
-        </h2>
-        <p className="text-sm text-gray-600 text-center mb-6">
-          Acesse sua conta para pedir ou gerenciar entregas.
-        </p>
+    <div className="auth-container">
+      <div className="auth-card">
+        
+        {/* Identidade Visual igual à imagem que você enviou */}
+        <h1 className="auth-logo">FavelaFood</h1>
+        <p className="auth-subtitle">Entre com a sua conta para fazer pedidos</p>
 
-        {erro && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm">
-            {erro}
-          </div>
-        )}
+        {erro && <div className="msg-erro">{erro}</div>}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">E-mail</label>
-            <input
-              type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              placeholder="seuemail@exemplo.com"
+        <form onSubmit={handleLogin}>
+          
+          <div className="form-group">
+            <label>E-mail</label>
+            <input 
+              type="email" 
+              required 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              placeholder="exemplo@email.com"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Senha</label>
-            <input
-              type="password" required value={senha} onChange={(e) => setSenha(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              placeholder="********"
+          <div className="form-group">
+            <label>Senha</label>
+            <input 
+              type="password" 
+              required 
+              value={senha} 
+              onChange={(e) => setSenha(e.target.value)} 
+              placeholder="Digite sua senha"
             />
           </div>
 
-          <button
-            type="submit" disabled={carregando}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
-          >
-            {carregando ? 'Entrando...' : 'Entrar'}
+          {/* Botão ovalado no estilo "Pedir" da imagem */}
+          <button type="submit" className="btn-primary">
+            Entrar
           </button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-600">
-          Não tem uma conta?{' '}
-          <a href="/cadastro" className="font-medium text-blue-600 hover:text-blue-500">
-            Cadastre-se aqui
-          </a>
-        </div>
+        {/* Navegação instantânea usando o Link do React Router */}
+        <p className="auth-switch">
+          Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
+        </p>
+
       </div>
     </div>
   );
