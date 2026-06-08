@@ -1,4 +1,4 @@
-package com.ggl.backend.entity;
+package com.ggl.backend.entity.enums;
 
 public enum TipoUsuarioEnum {
     CONSUMIDOR,

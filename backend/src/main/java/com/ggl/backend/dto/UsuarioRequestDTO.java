@@ -1,6 +1,6 @@
 package com.ggl.backend.dto;
 
-import com.ggl.backend.entity.TipoUsuarioEnum;
+import com.ggl.backend.entity.enums.TipoUsuarioEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

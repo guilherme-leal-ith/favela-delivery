@@ -1,5 +1,6 @@
 package com.ggl.backend.entity;
 
+import com.ggl.backend.entity.enums.TipoUsuarioEnum;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 

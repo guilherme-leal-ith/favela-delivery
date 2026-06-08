@@ -2,11 +2,10 @@ package com.ggl.backend.service;
 
 import com.ggl.backend.dto.ConsumidorRequestDTO;
 import com.ggl.backend.dto.ConsumidorResponseDTO;
-import com.ggl.backend.dto.ConsumidorUpdateDTO;
 import com.ggl.backend.dto.EnderecoRequestDTO;
 import com.ggl.backend.entity.Consumidor;
 import com.ggl.backend.entity.Endereco;
-import com.ggl.backend.entity.TipoUsuarioEnum;
+import com.ggl.backend.entity.enums.TipoUsuarioEnum;
 import com.ggl.backend.entity.Usuario;
 import com.ggl.backend.mapper.ConsumidorMapper;
 import com.ggl.backend.repository.ConsumidorRepository;

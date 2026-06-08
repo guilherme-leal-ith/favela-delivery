@@ -1,5 +1,7 @@
 package com.ggl.backend.entity;
 
+import com.ggl.backend.entity.enums.FormaPagamentoEnum;
+import com.ggl.backend.entity.enums.StatusPedidoEnum;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -20,11 +22,11 @@ public class Pedido {
 
     @Column(name = "status_pedido", nullable = false)
     @Enumerated(EnumType.STRING)
-    private StatusPedido statusPedido;
+    private StatusPedidoEnum statusPedido;
 
     @Column(name = "forma_pagamento", nullable = false)
     @Enumerated(EnumType.STRING)
-    private FormaPagamento formaPagamento;
+    private FormaPagamentoEnum formaPagamento;
 
     @Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorTotal;
@@ -57,19 +59,19 @@ public class Pedido {
         this.dataHora = dataHora;
     }
 
-    public StatusPedido getStatusPedido() {
+    public StatusPedidoEnum getStatusPedido() {
         return statusPedido;
     }
 
-    public void setStatusPedido(StatusPedido statusPedido) {
+    public void setStatusPedido(StatusPedidoEnum statusPedido) {
         this.statusPedido = statusPedido;
     }
 
-    public FormaPagamento getFormaPagamento() {
+    public FormaPagamentoEnum getFormaPagamento() {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(FormaPagamento formaPagamento) {
+    public void setFormaPagamento(FormaPagamentoEnum formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 
