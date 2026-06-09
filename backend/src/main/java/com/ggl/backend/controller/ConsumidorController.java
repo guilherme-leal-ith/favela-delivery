@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @RestController
@@ -14,14 +15,18 @@ import org.springframework.web.bind.annotation.*;
 public class ConsumidorController {
 
     private final ConsumidorService consumidorService;
+    private final PasswordEncoder passwordEncoder;
 
-    public ConsumidorController(ConsumidorService consumidorService){
+    public ConsumidorController(ConsumidorService consumidorService, PasswordEncoder passwordEncoder){
         this.consumidorService = consumidorService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping
     public ResponseEntity<ConsumidorResponseDTO> create(@Valid @RequestBody ConsumidorRequestDTO requestDTO){
-        ConsumidorResponseDTO novoConsumidor = consumidorService.saveConsumidor(requestDTO);
+
+        String senhaCripto = passwordEncoder.encode(requestDTO.senha());
+        ConsumidorResponseDTO novoConsumidor = consumidorService.saveConsumidor(requestDTO, senhaCripto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(novoConsumidor);
     }

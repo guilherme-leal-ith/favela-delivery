@@ -28,13 +28,12 @@ public class ConsumidorService {
     }
 
     @Transactional
-    public ConsumidorResponseDTO saveConsumidor(ConsumidorRequestDTO requestDTO){
+    public ConsumidorResponseDTO saveConsumidor(ConsumidorRequestDTO requestDTO, String senhaCripto){
         Usuario usuarioExistente = usuarioRepository.findByEmail(requestDTO.email());
         if(usuarioExistente != null){
             throw new RuntimeException("E-mail já cadastrado no sistema");
         }
 
-        String senhaCripto = passwordEncoder.encode(requestDTO.senha());
         Consumidor novoConsumidor = ConsumidorMapper.toEntity(requestDTO, senhaCripto);
         novoConsumidor.setTipoUsuario(TipoUsuarioEnum.CONSUMIDOR);
         Consumidor consumidorSalvo = consumidorRepository.save(novoConsumidor);
