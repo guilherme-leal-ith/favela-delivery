@@ -85,7 +85,13 @@ Adicionalmente, no arquivo `application.properties`, as propriedades de exibiç�
 <br>
 <br>
 
-[IMAGEM - Gráficos de Desempenho e Concorrência da 2ª Fase]
+## Resultados no terminal
+
+### Teste de inserção
+<img width="1073" height="631" alt="image" src="https://github.com/user-attachments/assets/12417704-6b50-4764-99cc-1060f3c622dc" />
+
+### Teste de leitura
+<img width="1201" height="628" alt="image" src="https://github.com/user-attachments/assets/44580a13-451b-400b-82f4-6da0fe4ca72c" />
 
 <br>
 <br>
@@ -109,13 +115,19 @@ Abaixo é apresentada a comparação detalhada e direta das métricas de Latênc
 <br>
 <br>
 
-<img width="960" height="720" alt="comparativo_insercao_latencia" src="https://github.com/user-attachments/assets/a576fce6-9ced-4837-94b9-02b6ba90f22a" />
+### Gráficos do teste de inserção
+<img width="3600" height="1800" alt="comparativo_latencia_com_vus" src="https://github.com/user-attachments/assets/929bb5ff-f7dc-46ed-b568-74ba6128d56b" />
 
-<img width="960" height="720" alt="comparativo_insercao_vazao" src="https://github.com/user-attachments/assets/27f5af18-e2b9-4e3a-8b48-a092ad5bf1d7" />
+<img width="3600" height="1800" alt="comparativo_vazao_com_vus" src="https://github.com/user-attachments/assets/66ce27ad-7306-488a-a2da-2b26085d12d6" />
 
-<img width="960" height="720" alt="comparativo_leitura_latencia" src="https://github.com/user-attachments/assets/a2e42596-590b-43c4-bb88-f4d21c8f4f07" />
 
-<img width="960" height="720" alt="comparativo_leitura_vazao" src="https://github.com/user-attachments/assets/616d33bb-bd40-4b64-a9c5-790544223ccd" />
+
+### Gráficos do teste de leitura
+
+<img width="3600" height="1800" alt="comparativo_leitura_latencia_com_vus" src="https://github.com/user-attachments/assets/0bf4c80f-92a1-43aa-b5f0-500075e752b1" />
+
+<img width="3600" height="1800" alt="comparativo_leitura_vazao_com_vus" src="https://github.com/user-attachments/assets/0732c681-d98b-4403-a417-134f39c400af" />
+
 
 
 
