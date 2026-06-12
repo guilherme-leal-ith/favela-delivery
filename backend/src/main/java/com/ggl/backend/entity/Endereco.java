@@ -29,4 +29,44 @@ public class Endereco {
     @ManyToOne
     @JoinColumn(name = "fk_consumidor_id")
     private Consumidor consumidor;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getPontoReferencia() {
+        return pontoReferencia;
+    }
+
+    public void setPontoReferencia(String pontoReferencia) {
+        this.pontoReferencia = pontoReferencia;
+    }
+
+    public Consumidor getConsumidor() {
+        return consumidor;
+    }
+
+    public void setConsumidor(Consumidor consumidor) {
+        this.consumidor = consumidor;
+    }
 }
