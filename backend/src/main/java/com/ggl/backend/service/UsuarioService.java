@@ -8,6 +8,8 @@ import com.ggl.backend.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
 
@@ -29,6 +31,18 @@ public class UsuarioService {
         return UsuarioMapper.toResponseDTO(usuario);
     }
 
+    public UsuarioResponseDTO findById(Integer id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        return UsuarioMapper.toResponseDTO(usuario);
+    }
+
+    public List<UsuarioResponseDTO> listarTodos() {
+        return usuarioRepository.findAll().stream()
+                .map(UsuarioMapper::toResponseDTO)
+                .toList();
+    }
+
     public UsuarioResponseDTO saveUsuario(UsuarioRequestDTO requestDTO) {
 
         Usuario usuarioExistente = usuarioRepository.findByEmail(requestDTO.email());
@@ -43,6 +57,28 @@ public class UsuarioService {
       Usuario usuarioSalvo = usuarioRepository.save(novoUsuario);
 
       return UsuarioMapper.toResponseDTO(usuarioSalvo);
+    }
+
+    public UsuarioResponseDTO atualizar(Integer id, UsuarioRequestDTO requestDTO) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        if (requestDTO.nome() != null) {
+            usuario.setNome(requestDTO.nome());
+        }
+        if (requestDTO.email() != null) {
+            usuario.setEmail(requestDTO.email());
+        }
+        if (requestDTO.senha() != null && !requestDTO.senha().isBlank()) {
+            usuario.setSenha(passwordEncoder.encode(requestDTO.senha()));
+        }
+        if (requestDTO.tipoUsuario() != null) {
+            usuario.setTipoUsuario(requestDTO.tipoUsuario());
+        }
+        return UsuarioMapper.toResponseDTO(usuarioRepository.save(usuario));
+    }
+
+    public void deletar(Integer id) {
+        usuarioRepository.deleteById(id);
     }
 
 

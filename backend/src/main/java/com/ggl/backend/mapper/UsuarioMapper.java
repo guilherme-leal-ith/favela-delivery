@@ -22,7 +22,8 @@ public class UsuarioMapper {
         UsuarioResponseDTO responseDTO = new UsuarioResponseDTO(
                 usuario.getId(),
                 usuario.getNome(),
-                usuario.getEmail()
+                usuario.getEmail(),
+                usuario.getTipoUsuario()
         );
 
         return responseDTO;

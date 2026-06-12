@@ -3,8 +3,7 @@ package com.ggl.backend.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ggl.backend.entity.enums.TipoUsuarioEnum;
 
-//Tudo que o cliente pode vir a precisar saber
-public record UsuarioResponseDTO(
+public record LoginResponseDTO(
         Integer id,
         String nome,
         String email,
