@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "consumidor")
-@PrimaryKeyJoinColumn(name = "fk_usuario_id")
+@PrimaryKeyJoinColumn(name = "fk_id")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,4 +26,19 @@ public class Consumidor extends Usuario{
         endereco.setConsumidor(this);
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 }
