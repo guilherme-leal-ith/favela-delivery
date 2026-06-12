@@ -20,7 +20,7 @@ public class SecurityConfig {
                 // 1. Configura o CORS para aceitar o seu Front-end do React
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:5173"));
+                    config.setAllowedOrigins(List.of("http://localhost:5173", "http://127.0.0.1:5173"));
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     config.setAllowedHeaders(List.of("*"));
                     return config;
@@ -31,8 +31,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/h2/**").permitAll()
-                        .requestMatchers("/api/user", "/api/user/**").permitAll()
-                        .requestMatchers("/api/consumidor/**").permitAll() // Rota que o seu colega adicionou!
+                        .requestMatchers("/api/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 // 4. Configurações extras para o console do H2 funcionar e desativa logins automáticos
