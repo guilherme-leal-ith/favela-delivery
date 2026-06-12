@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/consumidor")
+@RequestMapping({"/api/consumidor", "/api/consumidores"})
 public class ConsumidorController {
 
     private final ConsumidorService consumidorService;
@@ -31,5 +31,19 @@ public class ConsumidorController {
         ConsumidorResponseDTO consumidor = consumidorService.findById(id);
 
         return ResponseEntity.ok(consumidor);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ConsumidorResponseDTO> update(
+            @PathVariable Integer id,
+            @RequestBody ConsumidorRequestDTO requestDTO
+    ){
+        return ResponseEntity.ok(consumidorService.update(id, requestDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        consumidorService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

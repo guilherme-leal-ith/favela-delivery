@@ -67,6 +67,30 @@ public class ConsumidorService {
         consumidorRepository.save(consumidor);
     }
 
+    public ConsumidorResponseDTO update(Integer id, ConsumidorRequestDTO requestDTO) {
+        Consumidor consumidor = consumidorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Consumidor não encontrado com o ID:" + id));
+
+        if (requestDTO.nome() != null) {
+            consumidor.setNome(requestDTO.nome());
+        }
+        if (requestDTO.email() != null) {
+            consumidor.setEmail(requestDTO.email());
+        }
+        if (requestDTO.senha() != null && !requestDTO.senha().isBlank()) {
+            consumidor.setSenha(passwordEncoder.encode(requestDTO.senha()));
+        }
+        if (requestDTO.cpf() != null) {
+            consumidor.setCpf(requestDTO.cpf());
+        }
+
+        return ConsumidorMapper.toResponseDTO(consumidorRepository.save(consumidor));
+    }
+
+    public void delete(Integer id) {
+        consumidorRepository.deleteById(id);
+    }
+
     @Transactional
     public void adicionarEndereco(Integer consumidorId, EnderecoRequestDTO enderecoDTO){
         Consumidor consumidor = consumidorRepository.findById(consumidorId)
