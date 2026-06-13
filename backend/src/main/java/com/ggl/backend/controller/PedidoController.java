@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pedidos")
-@RequiredArgsConstructor
+@RequestMapping("/api/pedidos")
 public class PedidoController {
 
     private final PedidoService pedidoService;
@@ -44,6 +43,26 @@ public class PedidoController {
             @RequestBody PedidoRequestDTO dto) {
 
         return pedidoService.atualizar(id, dto);
+    }
+
+    @GetMapping("/consumidor/{id}")
+    public List<PedidoResponseDTO> listarPorConsumidor(@PathVariable Integer id) {
+        return pedidoService.listarPorConsumidor(id);
+    }
+
+    @GetMapping("/entregador/{id}")
+    public List<PedidoResponseDTO> listarPorEntregador(@PathVariable Integer id) {
+        return pedidoService.listarPorEntregador(id);
+    }
+
+    @GetMapping("/estabelecimento/{id}")
+    public List<PedidoResponseDTO> listarPorEstabelecimento(@PathVariable Integer id) {
+        return pedidoService.listarPorEstabelecimento(id);
+    }
+
+    @GetMapping("/disponiveis-entrega")
+    public List<PedidoResponseDTO> listarDisponiveisEntrega() {
+        return pedidoService.listarDisponiveisEntrega();
     }
 
     @DeleteMapping("/{id}")

@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pedidos")
@@ -40,8 +42,15 @@ public class Pedido {
     private Consumidor consumidor;
 
     @ManyToOne
-    @JoinColumn(name = "fk_entregador_id", nullable = false)
+    @JoinColumn(name = "fk_entregador_id")
     private Entregador entregador;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_endereco_id")
+    private Endereco endereco;
+
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemPedido> itens = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -105,5 +114,29 @@ public class Pedido {
 
     public void setEntregador(Entregador entregador) {
         this.entregador = entregador;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens.clear();
+        if (itens != null) {
+            itens.forEach(this::adicionarItem);
+        }
+    }
+
+    public void adicionarItem(ItemPedido item) {
+        this.itens.add(item);
+        item.setPedido(this);
     }
 }

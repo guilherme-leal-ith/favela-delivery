@@ -1,14 +1,11 @@
 package com.ggl.backend.dto;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record EnderecoRequestDTO(
-        @JsonAlias("fk_consumidor_id")
-        Integer consumidorId,
+public record EnderecoResponseDTO(
+        Integer id,
         String logradouro,
         String numero,
-        @JsonAlias("ponto_referencia")
         @JsonProperty("ponto_referencia")
         String pontoReferencia
 ) {
