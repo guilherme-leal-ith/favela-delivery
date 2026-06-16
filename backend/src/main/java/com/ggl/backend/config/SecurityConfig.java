@@ -50,10 +50,10 @@ public class SecurityConfig {
    @Bean
    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
        http
-               .csrf(csrf -> csrf.disable()) // Desativa proteção CSRF para testes com o Postman/React
-               .cors(cors -> cors.disable()) // Desativa o bloqueio de portas
+               .csrf(csrf -> csrf.disable())
+               .cors(cors -> cors.disable())
                .authorizeHttpRequests(auth -> auth
-                       .requestMatchers("/api/**").permitAll() // 🔥 Mude para permitir tudo dentro de /api/
+                       .requestMatchers("/api/**").permitAll()
                        .anyRequest().permitAll()
                );
 

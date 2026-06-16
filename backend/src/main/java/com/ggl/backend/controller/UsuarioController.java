@@ -34,7 +34,7 @@ public class UsuarioController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UsuarioRequestDTO dados) { // ou UsuarioRequestDTO
         try {
-            // Chama o service que agora valida a senha de verdade!
+            // Chama o service e valida a senha
             UsuarioResponseDTO usuarioLogado = usuarioService.efetuarLogin(dados.email(), dados.senha());
             return ResponseEntity.ok(usuarioLogado);
         } catch (RuntimeException e) {
