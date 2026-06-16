@@ -24,9 +24,16 @@ export default function Login() {
     event.preventDefault();
     setError('');
     try {
+      console.log("MANDANDO EMAIL PARA O JAVA...");
       const response = await authApi.login(form);
-      login(response.data);
-      navigate(redirectPath(response.data.tipo_usuario));
+      const dadosUsuario = {
+      ...response.data,
+      tipo_usuario: response.data.tipoUsuario // Duplica o valor para o padrão que o React usa nas rotas
+    };
+      login(dadosUsuario);
+      
+      console.log("ROTA DE DESTINO:", redirectPath(dadosUsuario.tipo_usuario));
+      navigate(redirectPath(dadosUsuario.tipo_usuario));
     } catch {
       setError('Email ou senha invalidos.');
     }

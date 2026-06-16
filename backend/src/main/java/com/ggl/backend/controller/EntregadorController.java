@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping({"/api/entregador", "/api/entregadores"})
+@CrossOrigin(origins = "*")
+
 public class EntregadorController {
 
     private final EntregadorService entregadorService;

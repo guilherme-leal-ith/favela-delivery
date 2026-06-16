@@ -8,9 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/consumidor")
+
 public class ConsumidorController {
 
     private final ConsumidorService consumidorService;
@@ -21,7 +22,10 @@ public class ConsumidorController {
 
     @PostMapping
     public ResponseEntity<ConsumidorResponseDTO> create(@Valid @RequestBody ConsumidorRequestDTO requestDTO){
+
+        System.out.println("====== REQUISIÇÃO CHEGOU NO JAVA! Dados recebidos: " + requestDTO.toString());
         ConsumidorResponseDTO novoConsumidor = consumidorService.saveConsumidor(requestDTO);
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(novoConsumidor);
     }

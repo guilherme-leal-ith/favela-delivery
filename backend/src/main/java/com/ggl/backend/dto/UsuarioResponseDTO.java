@@ -4,6 +4,7 @@ package com.ggl.backend.dto;
 public record UsuarioResponseDTO(
         Integer id,
         String nome,
-        String email
+        String email,
+        String tipoUsuario
 ) {
 }

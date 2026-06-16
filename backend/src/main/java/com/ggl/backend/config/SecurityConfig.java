@@ -14,7 +14,7 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
+   /* @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 // 1. Configura o CORS para aceitar o seu Front-end do React
@@ -45,6 +45,23 @@ public class SecurityConfig {
     // 5. Mantém o encoder de senha que o back-end precisa para funcionar
     @Bean
     public PasswordEncoder passwordHash() {
+        return new BCryptPasswordEncoder();
+    } */
+   @Bean
+   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+       http
+               .csrf(csrf -> csrf.disable()) // Desativa proteção CSRF para testes com o Postman/React
+               .cors(cors -> cors.disable()) // Desativa o bloqueio de portas
+               .authorizeHttpRequests(auth -> auth
+                       .requestMatchers("/api/**").permitAll() // 🔥 Mude para permitir tudo dentro de /api/
+                       .anyRequest().permitAll()
+               );
+
+       return http.build();
+   }
+
+   @Bean
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

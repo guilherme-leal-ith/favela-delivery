@@ -15,6 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping({"/api/estabelecimento", "/api/estabelecimentos"})
+@CrossOrigin(origins = "*")
 public class EstabelecimentoController {
 
     private final EstabelecimentoService estabelecimentoService;
